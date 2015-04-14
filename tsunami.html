@@ -1,4 +1,38 @@
+<style>
+  body {background-color: #000000;}
+</style>
 <video width="200" height="30" autoplay controls>
   <source src="http://stier.strangled.net/video/Tsunami%20Warning%20-%20West%20Coast%20of%20United%20States-yXunZrMNxGc.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
+<div id="border">
+   <canvas id="bannershow" width="500" height="150" />
+</div>
+<script>
+                    var globalx = 500;
+                    var vector = -1;
+                    var interval = 500;
+                    var canvas = document.getElementById('bannershow');
+                    var ctx = canvas.getContext('2d');
+                    var fontsize = 80;
+                    var canvasHeight = 150;
+                    var canvasWidth = 500;
+
+                    function banner(label) {
+
+                        ctx.clearRect(0, 0, canvasWidth, canvasHeight);    
+                        ctx.fillStyle = 'rgb(0, 0, 0)';
+                        ctx.fillRect (0, 0, canvasWidth, canvasHeight);
+
+                        ctx.fillStyle = 'rgba(255, 255, 255, 1)'
+                        ctx.font = fontsize + 'px Roboto';
+                        ctx.textBaseline = 'top';
+                        if (globalx < 0 - ctx.measureText(label).width) {
+                             globalx = canvasWidth;
+                        }                        
+                        ctx.fillText(label, globalx, (canvasHeight-fontsize)/2);
+
+                        globalx += vector;
+                    }
+setInterval(banner, 1000/interval, 'The National Weather Service has issued a *** Tsunami Warning *** for the following areas: The West Coast of the United States. This is effective until further notice. At 11:52 PM PDT, an earthquake measuring a 9.6 Magnitude occured on the Cascadia Fault Line. As a result of this earthquake, a large tsunami was generated and is expected to impact the west coast within 30 minutes. Wave heights can not be predicted at this time. All residents on the beach and in low-lying areas are advised to evacuate immediately. Follow designated evacuation routes which will lead you to higher ground. Please proceed in a quick, but orderly fashion. If you have children at school, do not attempt to pick them up as they are being evacuated as well. Do not use your telephone at this time. Leave the lines open for emergency use. Tune to KYTE radio at 102.7 FM for further information. Do not return to the warning area until the all-clear is given by local authorities. This tsunami warning remains in effect until further notice.');
+</script>
